@@ -34,12 +34,25 @@ export default function Console() {
     queryFn: () => base44.entities.Site.list('-created_date'),
   });
 
-  // Auto-select first site
+  // Auto-select first site and validate active site exists
   useEffect(() => {
-    if (sites.length > 0 && !activeSite) {
+    if (sites.length === 0) {
+      setActiveSite(null);
+      return;
+    }
+
+    // Check if current activeSite still exists in the list
+    if (activeSite) {
+      const siteExists = sites.find(s => s.id === activeSite.id);
+      if (!siteExists) {
+        // Active site was deleted, select first available
+        setActiveSite(sites[0]);
+      }
+    } else {
+      // No active site, select first one
       setActiveSite(sites[0]);
     }
-  }, [sites, activeSite]);
+  }, [sites]);
 
   // Mutations
   const createSiteMutation = useMutation({
