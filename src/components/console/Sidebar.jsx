@@ -14,6 +14,7 @@ import {
   LogOut,
   User
 } from 'lucide-react';
+import WorkspaceSelector from './WorkspaceSelector';
 
 export default function Sidebar({
   user,
@@ -28,7 +29,12 @@ export default function Sidebar({
   setView,
   onAddClick,
   onDeleteSite,
-  onLogout
+  onLogout,
+  workspaces,
+  activeWorkspace,
+  onSelectWorkspace,
+  onAddWorkspace,
+  onDeleteWorkspace
 }) {
   const filteredSites = sites.filter(s => 
     s.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -55,6 +61,16 @@ export default function Sidebar({
       </div>
 
       <div className="px-4 flex-1 flex flex-col overflow-hidden">
+        {/* Workspace Selector */}
+        <WorkspaceSelector
+          workspaces={workspaces}
+          activeWorkspace={activeWorkspace}
+          onSelectWorkspace={onSelectWorkspace}
+          onAddWorkspace={onAddWorkspace}
+          onDeleteWorkspace={onDeleteWorkspace}
+          isSidebarOpen={isSidebarOpen}
+        />
+
         {/* Search */}
         {isSidebarOpen && (
           <div className="relative mb-6 px-2">

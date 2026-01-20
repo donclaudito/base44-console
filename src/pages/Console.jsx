@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import Sidebar from '@/components/console/Sidebar';
 import AddSiteModal from '@/components/console/AddSiteModal';
+import AddWorkspaceModal from '@/components/console/AddWorkspaceModal';
 import WorkspaceHeader from '@/components/console/WorkspaceHeader';
 import SettingsView from '@/components/console/SettingsView';
 import EmptyWorkspace from '@/components/console/EmptyWorkspace';
@@ -12,8 +13,10 @@ import IframeViewer from '@/components/console/IframeViewer';
 export default function Console() {
   const [user, setUser] = useState(null);
   const [activeSite, setActiveSite] = useState(null);
+  const [activeWorkspace, setActiveWorkspace] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [view, setView] = useState('workspace');
 
@@ -28,11 +31,29 @@ export default function Console() {
     fetchUser();
   }, []);
 
-  // Fetch sites
-  const { data: sites = [], isLoading } = useQuery({
+  // Fetch workspaces
+  const { data: workspaces = [] } = useQuery({
+    queryKey: ['workspaces'],
+    queryFn: () => base44.entities.Workspace.list('-created_date'),
+  });
+
+  // Fetch sites (filtered by active workspace)
+  const { data: allSites = [], isLoading } = useQuery({
     queryKey: ['sites'],
     queryFn: () => base44.entities.Site.list('-created_date'),
   });
+
+  // Filter sites by active workspace
+  const sites = activeWorkspace
+    ? allSites.filter(site => site.workspace_id === activeWorkspace.id)
+    : [];
+
+  // Auto-select first workspace
+  useEffect(() => {
+    if (workspaces.length > 0 && !activeWorkspace) {
+      setActiveWorkspace(workspaces[0]);
+    }
+  }, [workspaces]);
 
   // Auto-select first site and validate active site exists
   useEffect(() => {
@@ -55,6 +76,23 @@ export default function Console() {
   }, [sites]);
 
   // Mutations
+  const createWorkspaceMutation = useMutation({
+    mutationFn: (data) => base44.entities.Workspace.create(data),
+    onSuccess: (newWorkspace) => {
+      queryClient.invalidateQueries({ queryKey: ['workspaces'] });
+      setActiveWorkspace(newWorkspace);
+      setIsWorkspaceModalOpen(false);
+    },
+  });
+
+  const deleteWorkspaceMutation = useMutation({
+    mutationFn: (id) => base44.entities.Workspace.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['workspaces'] });
+      setActiveWorkspace(null);
+    },
+  });
+
   const createSiteMutation = useMutation({
     mutationFn: (data) => base44.entities.Site.create(data),
     onSuccess: (newSite) => {
@@ -76,8 +114,20 @@ export default function Console() {
     base44.auth.logout();
   };
 
+  const handleAddWorkspace = async (workspaceData) => {
+    await createWorkspaceMutation.mutateAsync(workspaceData);
+  };
+
+  const handleDeleteWorkspace = async (id) => {
+    await deleteWorkspaceMutation.mutateAsync(id);
+  };
+
   const handleAddSite = async (siteData) => {
-    await createSiteMutation.mutateAsync(siteData);
+    if (!activeWorkspace) {
+      alert('Por favor, selecione ou crie um workspace primeiro.');
+      return;
+    }
+    await createSiteMutation.mutateAsync({ ...siteData, workspace_id: activeWorkspace.id });
   };
 
   const handleDeleteSite = async (id) => {
@@ -113,6 +163,11 @@ export default function Console() {
         onAddClick={() => setIsModalOpen(true)}
         onDeleteSite={handleDeleteSite}
         onLogout={handleLogout}
+        workspaces={workspaces}
+        activeWorkspace={activeWorkspace}
+        onSelectWorkspace={setActiveWorkspace}
+        onAddWorkspace={() => setIsWorkspaceModalOpen(true)}
+        onDeleteWorkspace={handleDeleteWorkspace}
       />
 
       {/* Main Content */}
@@ -138,6 +193,14 @@ export default function Console() {
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleAddSite}
         isLoading={createSiteMutation.isPending}
+      />
+
+      {/* Add Workspace Modal */}
+      <AddWorkspaceModal
+        isOpen={isWorkspaceModalOpen}
+        onClose={() => setIsWorkspaceModalOpen(false)}
+        onSubmit={handleAddWorkspace}
+        isLoading={createWorkspaceMutation.isPending}
       />
     </div>
   );
