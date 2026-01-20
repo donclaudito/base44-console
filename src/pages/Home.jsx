@@ -16,7 +16,7 @@ export default function Home() {
       <div className="flex flex-col items-center gap-4">
         <RefreshCw className="animate-spin text-blue-500" size={40} />
         <p className="text-slate-500 font-mono text-xs animate-pulse uppercase tracking-widest">
-          BOOTING BASE44 CONSOLE...
+          BOOTING ORENSTEIN AI CONSOLE...
         </p>
       </div>
     </div>

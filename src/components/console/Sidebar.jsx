@@ -43,7 +43,7 @@ export default function Sidebar({
             <Box size={22} className="text-white" />
           </div>
           {isSidebarOpen && (
-            <span className="font-black text-xl tracking-tighter text-white">Base44</span>
+            <span className="font-black text-xl tracking-tighter text-white">Orenstein AI</span>
           )}
         </div>
         <button
