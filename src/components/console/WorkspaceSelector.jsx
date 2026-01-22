@@ -6,7 +6,6 @@ export default function WorkspaceSelector({
   activeWorkspace,
   onSelectWorkspace,
   onAddWorkspace,
-  onDeleteWorkspace,
   isSidebarOpen
 }) {
   const [isOpen, setIsOpen] = useState(false);

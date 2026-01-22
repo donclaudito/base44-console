@@ -161,13 +161,11 @@ export default function Console() {
         view={view}
         setView={setView}
         onAddClick={() => setIsModalOpen(true)}
-        onDeleteSite={handleDeleteSite}
         onLogout={handleLogout}
         workspaces={workspaces}
         activeWorkspace={activeWorkspace}
         onSelectWorkspace={setActiveWorkspace}
         onAddWorkspace={() => setIsWorkspaceModalOpen(true)}
-        onDeleteWorkspace={handleDeleteWorkspace}
       />
 
       {/* Main Content */}

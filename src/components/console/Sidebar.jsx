@@ -27,13 +27,11 @@ export default function Sidebar({
   view,
   setView,
   onAddClick,
-  onDeleteSite,
   onLogout,
   workspaces,
   activeWorkspace,
   onSelectWorkspace,
-  onAddWorkspace,
-  onDeleteWorkspace
+  onAddWorkspace
 }) {
   const filteredSites = sites.filter(s => 
     s.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -66,7 +64,6 @@ export default function Sidebar({
           activeWorkspace={activeWorkspace}
           onSelectWorkspace={onSelectWorkspace}
           onAddWorkspace={onAddWorkspace}
-          onDeleteWorkspace={onDeleteWorkspace}
           isSidebarOpen={isSidebarOpen}
         />
 
