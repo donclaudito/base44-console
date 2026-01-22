@@ -196,6 +196,8 @@ export default function Console() {
               sitesCount={sites.length} 
               sites={sites}
               onDeleteSite={handleDeleteSite}
+              workspaces={workspaces}
+              onDeleteWorkspace={handleDeleteWorkspace}
             />
           )}
         </div>
