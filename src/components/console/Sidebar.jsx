@@ -29,12 +29,17 @@ export default function Sidebar({
   view,
   setView,
   onAddClick,
+  onDeleteSite,
+  onMoveSite,
   onLogout,
   workspaces,
   activeWorkspace,
   onSelectWorkspace,
-  onAddWorkspace
+  onAddWorkspace,
+  onDeleteWorkspace
 }) {
+  const [openMenuId, setOpenMenuId] = React.useState(null);
+  
   const filteredSites = sites.filter(s => 
     s.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
