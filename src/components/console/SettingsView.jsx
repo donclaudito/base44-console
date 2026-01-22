@@ -1,7 +1,8 @@
-import React from 'react';
-import { User } from 'lucide-react';
+import React, { useState } from 'react';
+import { User, Trash2, AlertTriangle } from 'lucide-react';
 
-export default function SettingsView({ user, sitesCount }) {
+export default function SettingsView({ user, sitesCount, sites, onDeleteSite }) {
+  const [deleteConfirmId, setDeleteConfirmId] = useState(null);
   return (
     <div className="flex-1 p-6 lg:p-12 overflow-y-auto">
       <div className="max-w-4xl mx-auto space-y-12 pb-20">
@@ -63,6 +64,65 @@ export default function SettingsView({ user, sitesCount }) {
               </p>
             </div>
           </div>
+        </section>
+
+        {/* Applications Management Section */}
+        <section>
+          <h4 className="text-sm font-black text-white uppercase tracking-widest mb-6 border-l-4 border-red-600 pl-4">
+            Gestão de Aplicações
+          </h4>
+          
+          {sites && sites.length > 0 ? (
+            <div className="space-y-3">
+              {sites.map((site) => (
+                <div
+                  key={site.id}
+                  className="flex items-center justify-between p-4 bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-2xl hover:bg-slate-800/50 transition-all"
+                >
+                  <div className="flex-1">
+                    <p className="text-sm font-bold text-white">{site.name}</p>
+                    <p className="text-xs text-slate-500 font-mono truncate mt-1">{site.url}</p>
+                  </div>
+                  
+                  {deleteConfirmId === site.id ? (
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <div className="flex items-center gap-2 px-3 py-2 bg-red-500/10 rounded-xl">
+                        <AlertTriangle size={14} className="text-red-500" />
+                        <span className="text-xs font-bold text-red-400">Confirmar exclusão?</span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          onDeleteSite(site.id);
+                          setDeleteConfirmId(null);
+                        }}
+                        className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all"
+                      >
+                        Sim, Excluir
+                      </button>
+                      <button
+                        onClick={() => setDeleteConfirmId(null)}
+                        className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-bold transition-all"
+                      >
+                        Cancelar
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setDeleteConfirmId(site.id)}
+                      className="px-4 py-2 bg-red-600/10 hover:bg-red-600 text-red-400 hover:text-white rounded-xl text-xs font-bold transition-all flex items-center gap-2"
+                    >
+                      <Trash2 size={14} />
+                      Excluir
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8 bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-2xl">
+              <p className="text-sm text-slate-500 font-medium">Nenhuma aplicação importada ainda</p>
+            </div>
+          )}
         </section>
 
         {/* Role Section */}
