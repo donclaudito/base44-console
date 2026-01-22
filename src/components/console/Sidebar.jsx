@@ -45,9 +45,15 @@ export default function Sidebar({
   );
 
   return (
-    <aside className={`${isSidebarOpen ? 'w-80' : 'w-20'} flex-shrink-0 bg-slate-900/40 backdrop-blur-md border-r border-white/5 transition-all duration-300 flex flex-col z-40`}>
+    <aside className={`
+      ${isSidebarOpen ? 'w-80 translate-x-0' : 'w-20 -translate-x-full lg:translate-x-0'} 
+      fixed lg:relative inset-y-0 left-0 z-40
+      flex-shrink-0 bg-slate-900/95 lg:bg-slate-900/40 backdrop-blur-md 
+      border-r border-white/5 transition-all duration-300 flex flex-col
+      shadow-2xl lg:shadow-none
+    `}>
       {/* Header */}
-      <div className="p-6 flex items-center justify-between">
+      <div className="p-4 lg:p-6 flex items-center justify-between">
         <div className="flex items-center gap-3 overflow-hidden">
           <div className="bg-blue-600 p-2.5 rounded-2xl flex-shrink-0 shadow-lg shadow-blue-500/20">
             <Box size={22} className="text-white" />
@@ -64,7 +70,7 @@ export default function Sidebar({
         </button>
       </div>
 
-      <div className="px-4 flex-1 flex flex-col overflow-hidden">
+      <div className="px-3 lg:px-4 flex-1 flex flex-col overflow-hidden">
         {/* Workspace Selector */}
         <WorkspaceSelector
           workspaces={workspaces}
@@ -89,10 +95,13 @@ export default function Sidebar({
         )}
 
         {/* Navigation */}
-        <nav className="space-y-1 px-2 mb-8">
+        <nav className="space-y-1 px-1 lg:px-2 mb-6 lg:mb-8">
           <button
-            onClick={() => setView('workspace')}
-            className={`w-full flex items-center gap-3 p-3.5 rounded-2xl transition-all ${
+            onClick={() => {
+              setView('workspace');
+              if (window.innerWidth < 1024) setIsSidebarOpen(false);
+            }}
+            className={`w-full flex items-center gap-3 p-3 lg:p-3.5 rounded-2xl transition-all touch-manipulation ${
               view === 'workspace'
                 ? 'bg-blue-600/10 text-blue-400 border border-blue-500/20'
                 : 'text-slate-500 hover:bg-white/5 border border-transparent'
@@ -102,8 +111,11 @@ export default function Sidebar({
             {isSidebarOpen && <span className="text-xs font-bold">Workspace</span>}
           </button>
           <button
-            onClick={() => setView('settings')}
-            className={`w-full flex items-center gap-3 p-3.5 rounded-2xl transition-all ${
+            onClick={() => {
+              setView('settings');
+              if (window.innerWidth < 1024) setIsSidebarOpen(false);
+            }}
+            className={`w-full flex items-center gap-3 p-3 lg:p-3.5 rounded-2xl transition-all touch-manipulation ${
               view === 'settings'
                 ? 'bg-blue-600/10 text-blue-400 border border-blue-500/20'
                 : 'text-slate-500 hover:bg-white/5 border border-transparent'
@@ -130,7 +142,7 @@ export default function Sidebar({
         )}
 
         {/* Sites List */}
-        <div className="flex-1 overflow-y-auto space-y-2 px-2 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+        <div className="flex-1 overflow-y-auto space-y-2 px-1 lg:px-2 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
           {filteredSites.length === 0 && isSidebarOpen && (
             <div className="text-center py-10 px-4">
               <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest mb-2 italic">
@@ -147,7 +159,7 @@ export default function Sidebar({
           {filteredSites.map((site) => (
                           <div
                             key={site.id}
-                            className={`group flex items-center justify-between p-3.5 rounded-2xl cursor-pointer transition-all border ${
+                            className={`group flex items-center justify-between p-3 lg:p-3.5 rounded-2xl cursor-pointer transition-all border touch-manipulation ${
                               activeSite?.id === site.id
                                 ? 'bg-white/5 border-white/10 text-white'
                                 : 'hover:bg-white/5 border-transparent text-slate-500'
@@ -159,6 +171,7 @@ export default function Sidebar({
                                 setActiveSite(site);
                                 setView('workspace');
                                 setOpenMenuId(null);
+                                if (window.innerWidth < 1024) setIsSidebarOpen(false);
                               }}
                             >
                               <div
@@ -219,7 +232,7 @@ export default function Sidebar({
         </div>
 
         {/* User Profile */}
-        <div className="mt-auto py-6 border-t border-white/5 px-2">
+        <div className="mt-auto py-4 lg:py-6 border-t border-white/5 px-2">
           <div className={`flex items-center gap-3 mb-4 ${!isSidebarOpen && 'justify-center'}`}>
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 border border-white/10 flex items-center justify-center text-white font-black text-xs shadow-xl">
               {user?.email ? user.email[0].toUpperCase() : <User size={16} />}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import { Menu } from 'lucide-react';
 
 import Sidebar from '@/components/console/Sidebar';
 import WorkspaceHeader from '@/components/console/WorkspaceHeader';
@@ -193,6 +194,14 @@ export default function Console() {
 
   return (
     <div className="h-screen w-full flex bg-slate-950 text-slate-200 overflow-hidden font-sans">
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <Sidebar
         user={user}
@@ -215,6 +224,14 @@ export default function Console() {
         onAddWorkspace={() => setIsWorkspaceModalOpen(true)}
         onDeleteWorkspace={handleDeleteWorkspace}
       />
+
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        className="fixed top-4 left-4 z-50 lg:hidden p-3 bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-xl shadow-xl touch-manipulation"
+      >
+        <Menu size={20} className="text-white" />
+      </button>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col relative bg-slate-950 overflow-hidden">
