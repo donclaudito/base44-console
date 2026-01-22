@@ -11,7 +11,9 @@ import {
   Plus,
   Monitor,
   LogOut,
-  User
+  User,
+  MoreVertical,
+  ArrowRightLeft
 } from 'lucide-react';
 import WorkspaceSelector from './WorkspaceSelector';
 
@@ -138,37 +140,77 @@ export default function Sidebar({
             </div>
           )}
           {filteredSites.map((site) => (
-            <div
-              key={site.id}
-              onClick={() => {
-                setActiveSite(site);
-                setView('workspace');
-              }}
-              className={`group flex items-center p-3.5 rounded-2xl cursor-pointer transition-all border ${
-                activeSite?.id === site.id
-                  ? 'bg-white/5 border-white/10 text-white'
-                  : 'hover:bg-white/5 border-transparent text-slate-500'
-              }`}
-            >
-              <div className="flex items-center gap-3 truncate">
-                <div
-                  className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${
-                    activeSite?.id === site.id
-                      ? 'bg-blue-600'
-                      : 'bg-slate-800 group-hover:bg-slate-700'
-                  }`}
-                >
-                  <Monitor
-                    size={14}
-                    className={activeSite?.id === site.id ? 'text-white' : 'text-slate-500'}
-                  />
-                </div>
-                {isSidebarOpen && (
-                  <span className="text-xs font-bold truncate">{site.name}</span>
-                )}
-              </div>
-            </div>
-          ))}
+                          <div
+                            key={site.id}
+                            className={`group flex items-center justify-between p-3.5 rounded-2xl cursor-pointer transition-all border ${
+                              activeSite?.id === site.id
+                                ? 'bg-white/5 border-white/10 text-white'
+                                : 'hover:bg-white/5 border-transparent text-slate-500'
+                            }`}
+                          >
+                            <div 
+                              className="flex items-center gap-3 truncate flex-1"
+                              onClick={() => {
+                                setActiveSite(site);
+                                setView('workspace');
+                                setOpenMenuId(null);
+                              }}
+                            >
+                              <div
+                                className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${
+                                  activeSite?.id === site.id
+                                    ? 'bg-blue-600'
+                                    : 'bg-slate-800 group-hover:bg-slate-700'
+                                }`}
+                              >
+                                <Monitor
+                                  size={14}
+                                  className={activeSite?.id === site.id ? 'text-white' : 'text-slate-500'}
+                                />
+                              </div>
+                              {isSidebarOpen && (
+                                <span className="text-xs font-bold truncate">{site.name}</span>
+                              )}
+                            </div>
+
+                            {/* Context Menu */}
+                            {isSidebarOpen && (
+                              <div className="relative">
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setOpenMenuId(openMenuId === site.id ? null : site.id);
+                                  }}
+                                  className="p-1.5 rounded-lg hover:bg-white/10 text-slate-500 hover:text-white transition-all opacity-0 group-hover:opacity-100"
+                                >
+                                  <MoreVertical size={14} />
+                                </button>
+
+                                {openMenuId === site.id && (
+                                  <>
+                                    <div 
+                                      className="fixed inset-0 z-10" 
+                                      onClick={() => setOpenMenuId(null)}
+                                    />
+                                    <div className="absolute right-0 top-8 z-20 w-44 bg-slate-800 border border-white/10 rounded-xl shadow-xl py-2">
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          onMoveSite(site);
+                                          setOpenMenuId(null);
+                                        }}
+                                        className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-all"
+                                      >
+                                        <ArrowRightLeft size={14} />
+                                        Mover para...
+                                      </button>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        ))}
         </div>
 
         {/* User Profile */}

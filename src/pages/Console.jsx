@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Sidebar from '@/components/console/Sidebar';
 import AddSiteModal from '@/components/console/AddSiteModal';
 import AddWorkspaceModal from '@/components/console/AddWorkspaceModal';
+import MoveSiteModal from '@/components/console/MoveSiteModal';
 import WorkspaceHeader from '@/components/console/WorkspaceHeader';
 import SettingsView from '@/components/console/SettingsView';
 import EmptyWorkspace from '@/components/console/EmptyWorkspace';
@@ -18,6 +19,8 @@ export default function Console() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
+  const [isMoveModalOpen, setIsMoveModalOpen] = useState(false);
+  const [siteToMove, setSiteToMove] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [view, setView] = useState('workspace');
 
@@ -110,6 +113,17 @@ export default function Console() {
     },
   });
 
+  const moveSiteMutation = useMutation({
+    mutationFn: ({ siteId, newWorkspaceId }) => 
+      base44.entities.Site.update(siteId, { workspace_id: newWorkspaceId }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['sites'] });
+      setIsMoveModalOpen(false);
+      setSiteToMove(null);
+      setActiveSite(null);
+    },
+  });
+
   const handleLogout = () => {
     base44.auth.logout();
   };
@@ -132,6 +146,15 @@ export default function Console() {
 
   const handleDeleteSite = async (id) => {
     await deleteSiteMutation.mutateAsync(id);
+  };
+
+  const handleMoveSite = async (siteId, newWorkspaceId) => {
+    await moveSiteMutation.mutateAsync({ siteId, newWorkspaceId });
+  };
+
+  const openMoveModal = (site) => {
+    setSiteToMove(site);
+    setIsMoveModalOpen(true);
   };
 
   // Mobile sidebar handling
@@ -215,6 +238,20 @@ export default function Console() {
         onClose={() => setIsWorkspaceModalOpen(false)}
         onSubmit={handleAddWorkspace}
         isLoading={createWorkspaceMutation.isPending}
+      />
+
+      {/* Move Site Modal */}
+      <MoveSiteModal
+        isOpen={isMoveModalOpen}
+        onClose={() => {
+          setIsMoveModalOpen(false);
+          setSiteToMove(null);
+        }}
+        onSubmit={handleMoveSite}
+        site={siteToMove}
+        workspaces={workspaces}
+        currentWorkspaceId={activeWorkspace?.id}
+        isLoading={moveSiteMutation.isPending}
       />
     </div>
   );
