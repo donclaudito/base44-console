@@ -182,7 +182,12 @@ export default function Console() {
               <EmptyWorkspace onAddClick={() => setIsModalOpen(true)} />
             )
           ) : (
-            <SettingsView user={user} sitesCount={sites.length} />
+            <SettingsView 
+              user={user} 
+              sitesCount={sites.length} 
+              sites={sites}
+              onDeleteSite={handleDeleteSite}
+            />
           )}
         </div>
       </main>

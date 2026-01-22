@@ -10,7 +10,6 @@ import {
   Settings,
   Plus,
   Monitor,
-  Trash2,
   LogOut,
   User
 } from 'lucide-react';
@@ -148,7 +147,7 @@ export default function Sidebar({
                 setActiveSite(site);
                 setView('workspace');
               }}
-              className={`group flex items-center justify-between p-3.5 rounded-2xl cursor-pointer transition-all border ${
+              className={`group flex items-center p-3.5 rounded-2xl cursor-pointer transition-all border ${
                 activeSite?.id === site.id
                   ? 'bg-white/5 border-white/10 text-white'
                   : 'hover:bg-white/5 border-transparent text-slate-500'
@@ -171,17 +170,6 @@ export default function Sidebar({
                   <span className="text-xs font-bold truncate">{site.name}</span>
                 )}
               </div>
-              {isSidebarOpen && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDeleteSite(site.id);
-                  }}
-                  className="opacity-0 group-hover:opacity-100 p-1 hover:text-red-400 transition-all"
-                >
-                  <Trash2 size={12} />
-                </button>
-              )}
             </div>
           ))}
         </div>
