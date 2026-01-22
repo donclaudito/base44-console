@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Plus, Layers, Trash2 } from 'lucide-react';
+import { ChevronDown, Plus, Layers } from 'lucide-react';
 
 export default function WorkspaceSelector({
   workspaces,
@@ -93,15 +93,6 @@ export default function WorkspaceSelector({
                         </p>
                       )}
                     </div>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onDeleteWorkspace(workspace.id);
-                      }}
-                      className="opacity-0 group-hover:opacity-100 p-1.5 hover:text-red-400 transition-all ml-2"
-                    >
-                      <Trash2 size={12} />
-                    </button>
                   </div>
                 ))
               )}
