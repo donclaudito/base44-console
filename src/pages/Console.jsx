@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -8,7 +8,8 @@ import AddWorkspaceModal from '@/components/console/AddWorkspaceModal';
 import WorkspaceHeader from '@/components/console/WorkspaceHeader';
 import SettingsView from '@/components/console/SettingsView';
 import EmptyWorkspace from '@/components/console/EmptyWorkspace';
-import IframeViewer from '@/components/console/IframeViewer';
+
+const IframeViewer = lazy(() => import('@/components/console/IframeViewer'));
 
 export default function Console() {
   const [user, setUser] = useState(null);
@@ -37,16 +38,15 @@ export default function Console() {
     queryFn: () => base44.entities.Workspace.list('-created_date'),
   });
 
-  // Fetch sites (filtered by active workspace)
-  const { data: allSites = [], isLoading } = useQuery({
-    queryKey: ['sites'],
-    queryFn: () => base44.entities.Site.list('-created_date'),
+  // Fetch sites (filtered by active workspace only)
+  const { data: sites = [], isLoading } = useQuery({
+    queryKey: ['sites', activeWorkspace?.id],
+    queryFn: () => {
+      if (!activeWorkspace?.id) return [];
+      return base44.entities.Site.filter({ workspace_id: activeWorkspace.id }, '-created_date');
+    },
+    enabled: !!activeWorkspace,
   });
-
-  // Filter sites by active workspace
-  const sites = activeWorkspace
-    ? allSites.filter(site => site.workspace_id === activeWorkspace.id)
-    : [];
 
   // Auto-select first workspace
   useEffect(() => {
@@ -177,7 +177,16 @@ export default function Console() {
         <div className="flex-1 relative overflow-hidden flex flex-col">
           {view === 'workspace' ? (
             activeSite ? (
-              <IframeViewer site={activeSite} />
+              <Suspense fallback={
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-16 h-16 border-4 border-blue-600/20 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-sm text-slate-500 font-medium">Carregando aplicação...</p>
+                  </div>
+                </div>
+              }>
+                <IframeViewer site={activeSite} />
+              </Suspense>
             ) : (
               <EmptyWorkspace onAddClick={() => setIsModalOpen(true)} />
             )
