@@ -1,16 +1,18 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import Sidebar from '@/components/console/Sidebar';
-import AddSiteModal from '@/components/console/AddSiteModal';
-import AddWorkspaceModal from '@/components/console/AddWorkspaceModal';
-import MoveSiteModal from '@/components/console/MoveSiteModal';
 import WorkspaceHeader from '@/components/console/WorkspaceHeader';
-import SettingsView from '@/components/console/SettingsView';
 import EmptyWorkspace from '@/components/console/EmptyWorkspace';
 
+// Lazy load heavy components
 const IframeViewer = lazy(() => import('@/components/console/IframeViewer'));
+const AddSiteModal = lazy(() => import('@/components/console/AddSiteModal'));
+const AddWorkspaceModal = lazy(() => import('@/components/console/AddWorkspaceModal'));
+const MoveSiteModal = lazy(() => import('@/components/console/MoveSiteModal'));
+const SettingsView = lazy(() => import('@/components/console/SettingsView'));
 
 export default function Console() {
   const [user, setUser] = useState(null);
@@ -85,6 +87,10 @@ export default function Console() {
       queryClient.invalidateQueries({ queryKey: ['workspaces'] });
       setActiveWorkspace(newWorkspace);
       setIsWorkspaceModalOpen(false);
+      toast.success('Workspace criado com sucesso!');
+    },
+    onError: () => {
+      toast.error('Erro ao criar workspace');
     },
   });
 
@@ -93,6 +99,10 @@ export default function Console() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['workspaces'] });
       setActiveWorkspace(null);
+      toast.success('Workspace excluído com sucesso');
+    },
+    onError: () => {
+      toast.error('Erro ao excluir workspace');
     },
   });
 
@@ -102,6 +112,10 @@ export default function Console() {
       queryClient.invalidateQueries({ queryKey: ['sites'] });
       setActiveSite(newSite);
       setIsModalOpen(false);
+      toast.success('Aplicação adicionada com sucesso!');
+    },
+    onError: () => {
+      toast.error('Erro ao adicionar aplicação');
     },
   });
 
@@ -110,6 +124,10 @@ export default function Console() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['sites'] });
       setActiveSite(null);
+      toast.success('Aplicação excluída com sucesso');
+    },
+    onError: () => {
+      toast.error('Erro ao excluir aplicação');
     },
   });
 
@@ -121,6 +139,10 @@ export default function Console() {
       setIsMoveModalOpen(false);
       setSiteToMove(null);
       setActiveSite(null);
+      toast.success('Aplicação movida com sucesso!');
+    },
+    onError: () => {
+      toast.error('Erro ao mover aplicação');
     },
   });
 
@@ -215,47 +237,59 @@ export default function Console() {
               <EmptyWorkspace onAddClick={() => setIsModalOpen(true)} />
             )
           ) : (
-            <SettingsView 
-              user={user} 
-              sitesCount={sites.length} 
-              sites={sites}
-              onDeleteSite={handleDeleteSite}
-              workspaces={workspaces}
-              onDeleteWorkspace={handleDeleteWorkspace}
-            />
+            <Suspense fallback={
+              <div className="flex-1 flex items-center justify-center">
+                <div className="w-8 h-8 border-4 border-blue-600/20 border-t-blue-600 rounded-full animate-spin"></div>
+              </div>
+            }>
+              <SettingsView 
+                user={user} 
+                sitesCount={sites.length} 
+                sites={sites}
+                onDeleteSite={handleDeleteSite}
+                workspaces={workspaces}
+                onDeleteWorkspace={handleDeleteWorkspace}
+              />
+            </Suspense>
           )}
         </div>
       </main>
 
-      {/* Add Site Modal */}
-      <AddSiteModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleAddSite}
-        isLoading={createSiteMutation.isPending}
-      />
+      {/* Modals with lazy loading */}
+      <Suspense fallback={null}>
+        {isModalOpen && (
+          <AddSiteModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onSubmit={handleAddSite}
+            isLoading={createSiteMutation.isPending}
+          />
+        )}
 
-      {/* Add Workspace Modal */}
-      <AddWorkspaceModal
-        isOpen={isWorkspaceModalOpen}
-        onClose={() => setIsWorkspaceModalOpen(false)}
-        onSubmit={handleAddWorkspace}
-        isLoading={createWorkspaceMutation.isPending}
-      />
+        {isWorkspaceModalOpen && (
+          <AddWorkspaceModal
+            isOpen={isWorkspaceModalOpen}
+            onClose={() => setIsWorkspaceModalOpen(false)}
+            onSubmit={handleAddWorkspace}
+            isLoading={createWorkspaceMutation.isPending}
+          />
+        )}
 
-      {/* Move Site Modal */}
-      <MoveSiteModal
-        isOpen={isMoveModalOpen}
-        onClose={() => {
-          setIsMoveModalOpen(false);
-          setSiteToMove(null);
-        }}
-        onSubmit={handleMoveSite}
-        site={siteToMove}
-        workspaces={workspaces}
-        currentWorkspaceId={activeWorkspace?.id}
-        isLoading={moveSiteMutation.isPending}
-      />
+        {isMoveModalOpen && (
+          <MoveSiteModal
+            isOpen={isMoveModalOpen}
+            onClose={() => {
+              setIsMoveModalOpen(false);
+              setSiteToMove(null);
+            }}
+            onSubmit={handleMoveSite}
+            site={siteToMove}
+            workspaces={workspaces}
+            currentWorkspaceId={activeWorkspace?.id}
+            isLoading={moveSiteMutation.isPending}
+          />
+        )}
+      </Suspense>
     </div>
   );
 }

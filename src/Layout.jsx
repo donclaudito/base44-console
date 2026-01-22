@@ -1,8 +1,20 @@
 import React from 'react';
+import { Toaster } from 'sonner';
 
 export default function Layout({ children }) {
   return (
     <>
+      <Toaster 
+        position="top-right" 
+        theme="dark"
+        toastOptions={{
+          style: {
+            background: 'rgb(30 41 59)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            color: 'white',
+          },
+        }}
+      />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
         
