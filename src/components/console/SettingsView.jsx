@@ -4,6 +4,15 @@ import { User, Trash2, AlertTriangle, Briefcase, BarChart3, Shield } from 'lucid
 export default function SettingsView({ user, sitesCount, sites, onDeleteSite, workspaces, onDeleteWorkspace }) {
   const [deleteSiteConfirmId, setDeleteSiteConfirmId] = useState(null);
   const [deleteWorkspaceConfirmId, setDeleteWorkspaceConfirmId] = useState(null);
+  const [iconSize, setIconSize] = useState(20);
+
+  React.useEffect(() => {
+    const updateSize = () => setIconSize(window.innerWidth < 640 ? 20 : 24);
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
   return (
     <div className="flex-1 p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-slate-950 to-slate-900">
       <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 pb-20">
@@ -16,7 +25,7 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
         <section className="bg-slate-900/50 backdrop-blur-sm border border-white/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
           <div className="flex items-center gap-2.5 sm:gap-3 mb-5 sm:mb-6">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-600/20 flex items-center justify-center flex-shrink-0">
-              <User size={window.innerWidth < 640 ? 20 : 24} className="text-blue-400" />
+              <User size={iconSize} className="text-blue-400" />
             </div>
             <div className="min-w-0">
               <h4 className="text-base sm:text-lg font-black text-white truncate">Perfil do Operador</h4>
@@ -232,7 +241,7 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
         <section className="bg-gradient-to-br from-blue-600/10 to-transparent border border-blue-500/20 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
           <div className="flex items-center gap-3 sm:gap-4">
             <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-blue-600/20 flex items-center justify-center flex-shrink-0">
-              <Shield size={window.innerWidth < 640 ? 24 : 28} className="text-blue-400" />
+              <Shield size={iconSize + 4} className="text-blue-400" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[10px] sm:text-xs font-bold text-blue-400 uppercase tracking-wider mb-1">
