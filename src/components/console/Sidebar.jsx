@@ -48,10 +48,9 @@ export default function Sidebar({
     <aside className={`
       ${isSidebarOpen ? 'w-80 translate-x-0' : 'w-20 -translate-x-full lg:translate-x-0'} 
       fixed lg:relative inset-y-0 left-0 z-40
-      flex-shrink-0 bg-slate-900/95 dark:bg-slate-900/95 lg:bg-slate-900/40 lg:dark:bg-slate-900/40 backdrop-blur-md 
-      border-r border-white/5 dark:border-white/5 transition-all duration-300 flex flex-col
+      flex-shrink-0 bg-white/95 dark:bg-slate-900/95 lg:bg-white/80 lg:dark:bg-slate-900/40 backdrop-blur-md 
+      border-r border-slate-200 dark:border-white/5 transition-all duration-300 flex flex-col
       shadow-2xl lg:shadow-none
-      light:bg-white light:lg:bg-white/80 light:border-slate-200
     `}>
       {/* Header */}
       <div className="p-4 lg:p-6 flex items-center justify-between">
@@ -60,12 +59,12 @@ export default function Sidebar({
             <Box size={22} className="text-white" />
           </div>
           {isSidebarOpen && (
-            <span className="font-black text-xl tracking-tighter text-white">Orenstein AI</span>
+            <span className="font-black text-xl tracking-tighter text-slate-900 dark:text-white">Orenstein AI</span>
           )}
         </div>
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="p-2 hover:bg-white/5 rounded-xl text-slate-500 transition-colors"
+          className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl text-slate-500 transition-colors"
         >
           {isSidebarOpen ? <ChevronRight className="rotate-180" size={20} /> : <Menu size={20} />}
         </button>
@@ -84,13 +83,13 @@ export default function Sidebar({
         {/* Search */}
         {isSidebarOpen && (
           <div className="relative mb-6 px-2">
-            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600" size={14} />
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-600" size={14} />
             <input
               type="text"
               placeholder="Pesquisar ferramentas..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-slate-800/30 border border-white/5 rounded-2xl text-[11px] outline-none focus:ring-1 focus:ring-blue-500/50 transition-all placeholder:text-slate-600 font-medium text-white"
+              className="w-full pl-10 pr-4 py-3 bg-slate-100 dark:bg-slate-800/30 border border-slate-200 dark:border-white/5 rounded-2xl text-[11px] outline-none focus:ring-1 focus:ring-blue-500/50 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600 font-medium text-slate-900 dark:text-white"
             />
           </div>
         )}
@@ -104,8 +103,8 @@ export default function Sidebar({
             }}
             className={`w-full flex items-center gap-3 p-3 lg:p-3.5 rounded-2xl transition-all touch-manipulation ${
               view === 'workspace'
-                ? 'bg-blue-600/10 text-blue-400 border border-blue-500/20'
-                : 'text-slate-500 hover:bg-white/5 border border-transparent'
+                ? 'bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
+                : 'text-slate-600 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5 border border-transparent'
             }`}
           >
             <LayoutDashboard size={18} />
@@ -118,8 +117,8 @@ export default function Sidebar({
             }}
             className={`w-full flex items-center gap-3 p-3 lg:p-3.5 rounded-2xl transition-all touch-manipulation ${
               view === 'settings'
-                ? 'bg-blue-600/10 text-blue-400 border border-blue-500/20'
-                : 'text-slate-500 hover:bg-white/5 border border-transparent'
+                ? 'bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
+                : 'text-slate-600 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5 border border-transparent'
             }`}
           >
             <Settings size={18} />
@@ -130,12 +129,12 @@ export default function Sidebar({
         {/* Apps Section */}
         {isSidebarOpen && (
           <div className="flex items-center justify-between mb-3 px-4">
-            <h3 className="text-[10px] font-black text-slate-600 uppercase tracking-widest">
+            <h3 className="text-[10px] font-black text-slate-500 dark:text-slate-600 uppercase tracking-widest">
               Aplicações
             </h3>
             <button
               onClick={onAddClick}
-              className="p-1.5 bg-blue-600/10 text-blue-500 rounded-lg hover:bg-blue-600 hover:text-white transition-all"
+              className="p-1.5 bg-blue-600/10 text-blue-600 dark:text-blue-500 rounded-lg hover:bg-blue-600 hover:text-white transition-all"
             >
               <Plus size={14} />
             </button>
@@ -162,8 +161,8 @@ export default function Sidebar({
                             key={site.id}
                             className={`group flex items-center justify-between p-3 lg:p-3.5 rounded-2xl cursor-pointer transition-all border touch-manipulation ${
                               activeSite?.id === site.id
-                                ? 'bg-white/5 border-white/10 text-white'
-                                : 'hover:bg-white/5 border-transparent text-slate-500'
+                                ? 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-900 dark:text-white'
+                                : 'hover:bg-slate-50 dark:hover:bg-white/5 border-transparent text-slate-600 dark:text-slate-500'
                             }`}
                           >
                             <div 
@@ -179,16 +178,16 @@ export default function Sidebar({
                                 className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${
                                   activeSite?.id === site.id
                                     ? 'bg-blue-600'
-                                    : 'bg-slate-800 group-hover:bg-slate-700'
+                                    : 'bg-slate-200 dark:bg-slate-800 group-hover:bg-slate-300 dark:group-hover:bg-slate-700'
                                 }`}
                               >
                                 <Monitor
                                   size={14}
-                                  className={activeSite?.id === site.id ? 'text-white' : 'text-slate-500'}
+                                  className={activeSite?.id === site.id ? 'text-white' : 'text-slate-600 dark:text-slate-500'}
                                 />
                               </div>
                               {isSidebarOpen && (
-                                <span className="text-xs font-bold truncate">{site.name}</span>
+                                <span className="text-xs font-bold truncate text-slate-900 dark:text-white">{site.name}</span>
                               )}
                             </div>
 
@@ -200,7 +199,7 @@ export default function Sidebar({
                                     e.stopPropagation();
                                     setOpenMenuId(openMenuId === site.id ? null : site.id);
                                   }}
-                                  className="p-1.5 rounded-lg hover:bg-white/10 text-slate-500 hover:text-white transition-all opacity-0 group-hover:opacity-100"
+                                  className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-white/10 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all opacity-0 group-hover:opacity-100"
                                 >
                                   <MoreVertical size={14} />
                                 </button>
@@ -211,14 +210,14 @@ export default function Sidebar({
                                       className="fixed inset-0 z-10" 
                                       onClick={() => setOpenMenuId(null)}
                                     />
-                                    <div className="absolute right-0 top-8 z-20 w-44 bg-slate-800 border border-white/10 rounded-xl shadow-xl py-2">
+                                    <div className="absolute right-0 top-8 z-20 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded-xl shadow-xl py-2">
                                       <button
                                         onClick={(e) => {
                                           e.stopPropagation();
                                           onMoveSite(site);
                                           setOpenMenuId(null);
                                         }}
-                                        className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-all"
+                                        className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white transition-all"
                                       >
                                         <ArrowRightLeft size={14} />
                                         Mover para...
@@ -233,17 +232,17 @@ export default function Sidebar({
         </div>
 
         {/* User Profile */}
-        <div className="mt-auto py-4 lg:py-6 border-t border-white/5 px-2">
+        <div className="mt-auto py-4 lg:py-6 border-t border-slate-200 dark:border-white/5 px-2">
           <div className={`flex items-center gap-3 mb-4 ${!isSidebarOpen && 'justify-center'}`}>
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 border border-white/10 flex items-center justify-center text-white font-black text-xs shadow-xl">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-slate-300 to-slate-400 dark:from-slate-700 dark:to-slate-900 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white font-black text-xs shadow-xl">
               {user?.email ? user.email[0].toUpperCase() : <User size={16} />}
             </div>
             {isSidebarOpen && (
               <div className="truncate">
-                <p className="text-xs font-bold text-white truncate">
+                <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
                   {user?.email || user?.full_name || 'Utilizador'}
                 </p>
-                <p className="text-[9px] text-slate-600 font-mono truncate">
+                <p className="text-[9px] text-slate-500 dark:text-slate-600 font-mono truncate">
                   {user?.id?.substring(0, 12)}...
                 </p>
               </div>
@@ -253,8 +252,8 @@ export default function Sidebar({
             onClick={onLogout}
             className={`w-full flex items-center gap-2 py-3.5 rounded-2xl transition-all text-[10px] font-black uppercase tracking-widest active:scale-95 ${
               isSidebarOpen
-                ? 'bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white justify-center'
-                : 'text-slate-500 hover:text-red-400 justify-center'
+                ? 'bg-red-500/10 hover:bg-red-500 text-red-500 dark:text-red-400 hover:text-white justify-center'
+                : 'text-slate-500 hover:text-red-500 dark:hover:text-red-400 justify-center'
             }`}
           >
             <LogOut size={14} />

@@ -14,22 +14,22 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
   }, []);
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-slate-950 to-slate-900 dark:from-slate-950 dark:to-slate-900 light:from-slate-50 light:to-slate-100">
+    <div className="flex-1 p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
       <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 pb-20">
         {/* Header */}
         <div className="mb-8 sm:mb-12">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-2">Definições do Sistema</h1>
-          <p className="text-slate-400 text-xs sm:text-sm">Gerir perfil, workspaces e aplicações</p>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white mb-2">Definições do Sistema</h1>
+          <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Gerir perfil, workspaces e aplicações</p>
         </div>
         {/* Profile Section */}
-        <section className="bg-slate-900/50 backdrop-blur-sm border border-white/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
+        <section className="bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200 dark:border-white/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
           <div className="flex items-center gap-2.5 sm:gap-3 mb-5 sm:mb-6">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-600/20 flex items-center justify-center flex-shrink-0">
-              <User size={iconSize} className="text-blue-400" />
+              <User size={iconSize} className="text-blue-600 dark:text-blue-400" />
             </div>
             <div className="min-w-0">
-              <h4 className="text-base sm:text-lg font-black text-white truncate">Perfil do Operador</h4>
-              <p className="text-[10px] sm:text-xs text-slate-500">Informações da conta</p>
+              <h4 className="text-base sm:text-lg font-black text-slate-900 dark:text-white truncate">Perfil do Operador</h4>
+              <p className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-500">Informações da conta</p>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
