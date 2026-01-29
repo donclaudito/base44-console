@@ -13,7 +13,8 @@ import {
   LogOut,
   User,
   MoreVertical,
-  ArrowRightLeft
+  ArrowRightLeft,
+  Trash2
 } from 'lucide-react';
 import WorkspaceSelector from './WorkspaceSelector';
 
@@ -221,6 +222,17 @@ export default function Sidebar({
                                       >
                                         <ArrowRightLeft size={14} />
                                         Mover para...
+                                      </button>
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          onDeleteSite(site.id);
+                                          setOpenMenuId(null);
+                                        }}
+                                        className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all"
+                                      >
+                                        <Trash2 size={14} />
+                                        Excluir
                                       </button>
                                     </div>
                                   </>
