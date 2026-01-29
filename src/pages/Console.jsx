@@ -79,7 +79,7 @@ export default function Console() {
       // No active site, select first one
       setActiveSite(sites[0]);
     }
-  }, [sites]);
+  }, [sites, activeSite]);
 
   // Mutations
   const createWorkspaceMutation = useMutation({
