@@ -71,28 +71,28 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
               Aplicações Ativas
             </p>
           </div>
-          <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-slate-900/50 border border-white/5 hover:border-white/10 transition-all">
+          <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-green-600/20 via-green-600/10 to-transparent border border-green-500/20 hover:border-green-500/40 transition-all">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <BarChart3 size={18} className="text-green-400" />
+              <BarChart3 size={18} className="text-green-700 dark:text-green-400" />
             </div>
-            <p className="text-2xl sm:text-3xl font-black text-white mb-1">100%</p>
-            <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1">100%</p>
+            <p className="text-[10px] sm:text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wider">
               Uptime Terminal
             </p>
           </div>
-          <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-slate-900/50 border border-white/5 hover:border-white/10 transition-all">
+          <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-purple-600/20 via-purple-600/10 to-transparent border border-purple-500/20 hover:border-purple-500/40 transition-all">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <Shield size={18} className="text-purple-400" />
+              <Shield size={18} className="text-purple-700 dark:text-purple-400" />
             </div>
-            <p className="text-2xl sm:text-3xl font-black text-white mb-1">v4.4.0</p>
-            <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1">v4.4.0</p>
+            <p className="text-[10px] sm:text-xs font-bold text-purple-700 dark:text-purple-400 uppercase tracking-wider">
               Build Versão
             </p>
           </div>
         </section>
 
         {/* Workspaces Management Section */}
-        <section className="bg-slate-900/50 backdrop-blur-sm border border-white/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
+        <section className="bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-300 dark:border-white/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
           <div className="flex items-center justify-between mb-5 sm:mb-6">
             <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-purple-600/20 flex items-center justify-center flex-shrink-0">
@@ -139,7 +139,7 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
                         </button>
                         <button
                           onClick={() => setDeleteWorkspaceConfirmId(null)}
-                          className="flex-1 sm:flex-none px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg sm:rounded-xl text-xs font-bold transition-all touch-manipulation"
+                          className="flex-1 sm:flex-none px-4 py-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600 text-slate-900 dark:text-white rounded-lg sm:rounded-xl text-xs font-bold transition-all touch-manipulation"
                         >
                           Cancelar
                         </button>
@@ -158,15 +158,15 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
               ))}
             </div>
           ) : (
-            <div className="text-center py-10 sm:py-12 bg-white/5 border border-dashed border-white/10 rounded-xl sm:rounded-2xl">
-              <Briefcase size={28} className="text-slate-600 mx-auto mb-2 sm:mb-3" />
-              <p className="text-xs sm:text-sm text-slate-400 font-medium px-4">Nenhum workspace criado ainda</p>
+            <div className="text-center py-10 sm:py-12 bg-slate-100 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 rounded-xl sm:rounded-2xl">
+              <Briefcase size={28} className="text-slate-500 dark:text-slate-600 mx-auto mb-2 sm:mb-3" />
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium px-4">Nenhum workspace criado ainda</p>
             </div>
           )}
         </section>
 
         {/* Applications Management Section */}
-        <section className="bg-slate-900/50 backdrop-blur-sm border border-white/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
+        <section className="bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-300 dark:border-white/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
           <div className="flex items-center justify-between mb-5 sm:mb-6">
             <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-red-600/20 flex items-center justify-center flex-shrink-0">
@@ -211,7 +211,7 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
                         </button>
                         <button
                           onClick={() => setDeleteSiteConfirmId(null)}
-                          className="flex-1 sm:flex-none px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg sm:rounded-xl text-xs font-bold transition-all touch-manipulation"
+                          className="flex-1 sm:flex-none px-4 py-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600 text-slate-900 dark:text-white rounded-lg sm:rounded-xl text-xs font-bold transition-all touch-manipulation"
                         >
                           Cancelar
                         </button>
@@ -230,24 +230,24 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
               ))}
             </div>
           ) : (
-            <div className="text-center py-10 sm:py-12 bg-white/5 border border-dashed border-white/10 rounded-xl sm:rounded-2xl">
-              <Briefcase size={28} className="text-slate-600 mx-auto mb-2 sm:mb-3" />
-              <p className="text-xs sm:text-sm text-slate-400 font-medium px-4">Nenhuma aplicação no workspace atual</p>
+            <div className="text-center py-10 sm:py-12 bg-slate-100 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 rounded-xl sm:rounded-2xl">
+              <Briefcase size={28} className="text-slate-500 dark:text-slate-600 mx-auto mb-2 sm:mb-3" />
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium px-4">Nenhuma aplicação no workspace atual</p>
             </div>
           )}
         </section>
 
         {/* Role Section */}
-        <section className="bg-gradient-to-br from-blue-600/10 to-transparent border border-blue-500/20 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
+        <section className="bg-gradient-to-br from-blue-600/15 to-blue-600/5 border border-blue-500/30 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
           <div className="flex items-center gap-3 sm:gap-4">
             <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-blue-600/20 flex items-center justify-center flex-shrink-0">
-              <Shield size={iconSize + 4} className="text-blue-400" />
+              <Shield size={iconSize + 4} className="text-blue-700 dark:text-blue-400" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[10px] sm:text-xs font-bold text-blue-400 uppercase tracking-wider mb-1">
+              <p className="text-[10px] sm:text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider mb-1">
                 Nível de Acesso
               </p>
-              <p className="text-xl sm:text-2xl font-black text-white capitalize truncate">
+              <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white capitalize truncate">
                 {user?.role || 'user'}
               </p>
             </div>
