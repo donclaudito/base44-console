@@ -122,9 +122,12 @@ export default function Console() {
 
   const deleteSiteMutation = useMutation({
     mutationFn: (id) => base44.entities.Site.delete(id),
-    onSuccess: () => {
+    onSuccess: (_, deletedId) => {
+      // Clear active site immediately if it was the deleted one
+      if (activeSite?.id === deletedId) {
+        setActiveSite(null);
+      }
       queryClient.invalidateQueries({ queryKey: ['sites'] });
-      setActiveSite(null);
       toast.success('Aplicação excluída com sucesso');
     },
     onError: () => {
