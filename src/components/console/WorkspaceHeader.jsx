@@ -13,13 +13,13 @@ export default function WorkspaceHeader({ activeSite, view }) {
   }, []);
 
   return (
-    <header className="h-20 bg-white/80 dark:bg-slate-900/20 backdrop-blur-2xl border-b border-slate-200 dark:border-white/5 flex items-center justify-between px-6 lg:px-10">
+    <header className="h-20 bg-white dark:bg-slate-900/20 backdrop-blur-2xl border-b border-slate-300 dark:border-white/5 flex items-center justify-between px-6 lg:px-10">
       <div className="flex items-center gap-4 lg:gap-6">
         <div className="flex flex-col">
           <h2 className="text-lg lg:text-xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
             {view === 'settings' ? 'Definições do Sistema' : (activeSite?.name || 'Início')}
             {activeSite && view === 'workspace' && (
-              <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 text-[9px] font-mono border border-blue-500/20 uppercase tracking-wider">
+              <span className="px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-700 dark:text-blue-500 text-[9px] font-mono border border-blue-500/30 uppercase tracking-wider">
                 {activeSite.status || 'Online'}
               </span>
             )}
@@ -36,7 +36,7 @@ export default function WorkspaceHeader({ activeSite, view }) {
       <div className="flex items-center gap-2 lg:gap-4">
         {activeSite && view === 'workspace' && (
           <>
-            <div className="hidden sm:flex items-center gap-3 px-4 border-r border-white/10 mr-2 text-slate-500">
+            <div className="hidden sm:flex items-center gap-3 px-4 border-r border-slate-300 dark:border-white/10 mr-2 text-slate-700 dark:text-slate-500">
               <Clock size={14} />
               <span className="text-[10px] font-mono font-bold">{time}</span>
             </div>
@@ -52,7 +52,7 @@ export default function WorkspaceHeader({ activeSite, view }) {
           </>
         )}
         <ThemeToggle />
-        <button className="p-3 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 rounded-2xl transition-all">
+        <button className="p-3 bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 text-slate-700 dark:text-slate-400 rounded-2xl transition-all">
           <Activity size={18} />
         </button>
       </div>

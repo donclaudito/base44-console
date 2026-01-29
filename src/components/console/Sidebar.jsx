@@ -49,8 +49,8 @@ export default function Sidebar({
     <aside className={`
       ${isSidebarOpen ? 'w-80 translate-x-0' : 'w-20 -translate-x-full lg:translate-x-0'} 
       fixed lg:relative inset-y-0 left-0 z-40
-      flex-shrink-0 bg-white/95 dark:bg-slate-900/95 lg:bg-white/80 lg:dark:bg-slate-900/40 backdrop-blur-md 
-      border-r border-slate-200 dark:border-white/5 transition-all duration-300 flex flex-col
+      flex-shrink-0 bg-white dark:bg-slate-900/95 lg:bg-white lg:dark:bg-slate-900/40 backdrop-blur-md 
+      border-r border-slate-300 dark:border-white/5 transition-all duration-300 flex flex-col
       shadow-2xl lg:shadow-none
     `}>
       {/* Header */}
@@ -65,7 +65,7 @@ export default function Sidebar({
         </div>
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl text-slate-500 transition-colors"
+          className="p-2 hover:bg-slate-200 dark:hover:bg-white/5 rounded-xl text-slate-700 dark:text-slate-500 transition-colors"
         >
           {isSidebarOpen ? <ChevronRight className="rotate-180" size={20} /> : <Menu size={20} />}
         </button>
@@ -90,7 +90,7 @@ export default function Sidebar({
               placeholder="Pesquisar ferramentas..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-slate-100 dark:bg-slate-800/30 border border-slate-200 dark:border-white/5 rounded-2xl text-[11px] outline-none focus:ring-1 focus:ring-blue-500/50 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600 font-medium text-slate-900 dark:text-white"
+              className="w-full pl-10 pr-4 py-3 bg-slate-100 dark:bg-slate-800/30 border border-slate-300 dark:border-white/5 rounded-2xl text-[11px] outline-none focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-500 dark:placeholder:text-slate-600 font-medium text-slate-900 dark:text-white"
             />
           </div>
         )}
@@ -104,8 +104,8 @@ export default function Sidebar({
             }}
             className={`w-full flex items-center gap-3 p-3 lg:p-3.5 rounded-2xl transition-all touch-manipulation ${
               view === 'workspace'
-                ? 'bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
-                : 'text-slate-600 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5 border border-transparent'
+                ? 'bg-blue-600/15 text-blue-700 dark:text-blue-400 border border-blue-500/30'
+                : 'text-slate-700 dark:text-slate-500 hover:bg-slate-200 dark:hover:bg-white/5 border border-transparent'
             }`}
           >
             <LayoutDashboard size={18} />
@@ -118,8 +118,8 @@ export default function Sidebar({
             }}
             className={`w-full flex items-center gap-3 p-3 lg:p-3.5 rounded-2xl transition-all touch-manipulation ${
               view === 'settings'
-                ? 'bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
-                : 'text-slate-600 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5 border border-transparent'
+                ? 'bg-blue-600/15 text-blue-700 dark:text-blue-400 border border-blue-500/30'
+                : 'text-slate-700 dark:text-slate-500 hover:bg-slate-200 dark:hover:bg-white/5 border border-transparent'
             }`}
           >
             <Settings size={18} />
@@ -130,7 +130,7 @@ export default function Sidebar({
         {/* Apps Section */}
         {isSidebarOpen && (
           <div className="flex items-center justify-between mb-3 px-4">
-            <h3 className="text-[10px] font-black text-slate-500 dark:text-slate-600 uppercase tracking-widest">
+            <h3 className="text-[10px] font-black text-slate-600 dark:text-slate-600 uppercase tracking-widest">
               Aplicações
             </h3>
             <button
@@ -161,10 +161,10 @@ export default function Sidebar({
                           <div
                             key={site.id}
                             className={`group flex items-center justify-between p-3 lg:p-3.5 rounded-2xl cursor-pointer transition-all border touch-manipulation ${
-                              activeSite?.id === site.id
-                                ? 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-900 dark:text-white'
-                                : 'hover:bg-slate-50 dark:hover:bg-white/5 border-transparent text-slate-600 dark:text-slate-500'
-                            }`}
+                                              activeSite?.id === site.id
+                                                ? 'bg-slate-200 dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-900 dark:text-white'
+                                                : 'hover:bg-slate-100 dark:hover:bg-white/5 border-transparent text-slate-700 dark:text-slate-500'
+                                            }`}
                           >
                             <div 
                               className="flex items-center gap-3 truncate flex-1"

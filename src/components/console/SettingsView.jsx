@@ -14,7 +14,7 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
   }, []);
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+    <div className="flex-1 p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900">
       <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 pb-20">
         {/* Header */}
         <div className="mb-8 sm:mb-12">
@@ -22,7 +22,7 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
           <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Gerir perfil, workspaces e aplicações</p>
         </div>
         {/* Profile Section */}
-        <section className="bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200 dark:border-white/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
+        <section className="bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-300 dark:border-white/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8">
           <div className="flex items-center gap-2.5 sm:gap-3 mb-5 sm:mb-6">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-600/20 flex items-center justify-center flex-shrink-0">
               <User size={iconSize} className="text-blue-600 dark:text-blue-400" />
@@ -33,27 +33,27 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-            <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-all">
-              <p className="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase mb-2 tracking-wider">
+            <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/5 hover:border-slate-400 dark:hover:border-white/10 transition-all">
+              <p className="text-[9px] sm:text-[10px] font-bold text-slate-600 dark:text-slate-500 uppercase mb-2 tracking-wider">
                 Endereço Registado
               </p>
-              <p className="text-xs sm:text-sm font-bold text-white font-mono break-all">
+              <p className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-mono break-all">
                 {user?.email || 'Admin/Root'}
               </p>
             </div>
-            <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-all">
-              <p className="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase mb-2 tracking-wider">
+            <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/5 hover:border-slate-400 dark:hover:border-white/10 transition-all">
+              <p className="text-[9px] sm:text-[10px] font-bold text-slate-600 dark:text-slate-500 uppercase mb-2 tracking-wider">
                 Nome Completo
               </p>
-              <p className="text-xs sm:text-sm font-bold text-white truncate">
+              <p className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
                 {user?.full_name || 'Não definido'}
               </p>
             </div>
-            <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-all md:col-span-2">
-              <p className="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase mb-2 tracking-wider">
+            <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/5 hover:border-slate-400 dark:hover:border-white/10 transition-all md:col-span-2">
+              <p className="text-[9px] sm:text-[10px] font-bold text-slate-600 dark:text-slate-500 uppercase mb-2 tracking-wider">
                 ID Único do Sistema
               </p>
-              <p className="text-[10px] sm:text-xs font-bold text-white font-mono break-all">
+              <p className="text-[10px] sm:text-xs font-bold text-slate-900 dark:text-white font-mono break-all">
                 {user?.id || 'N/A'}
               </p>
             </div>
@@ -66,8 +66,8 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
             <div className="flex items-center justify-between mb-3 sm:mb-4">
               <Briefcase size={18} className="text-blue-400" />
             </div>
-            <p className="text-2xl sm:text-3xl font-black text-white mb-1">{sitesCount}</p>
-            <p className="text-[10px] sm:text-xs font-bold text-blue-400 uppercase tracking-wider">
+            <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1">{sitesCount}</p>
+            <p className="text-[10px] sm:text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">
               Aplicações Ativas
             </p>
           </div>
@@ -99,8 +99,8 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
                 <Briefcase size={18} className="text-purple-400" />
               </div>
               <div className="min-w-0">
-                <h4 className="text-base sm:text-lg font-black text-white truncate">Gestão de Workspaces</h4>
-                <p className="text-[10px] sm:text-xs text-slate-500">
+                <h4 className="text-base sm:text-lg font-black text-slate-900 dark:text-white truncate">Gestão de Workspaces</h4>
+                <p className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-500">
                   {workspaces?.length || 0} workspace{workspaces?.length !== 1 ? 's' : ''} configurado{workspaces?.length !== 1 ? 's' : ''}
                 </p>
               </div>
@@ -115,9 +115,9 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
                   className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 bg-white/5 border border-white/5 rounded-xl sm:rounded-2xl hover:border-white/10 hover:bg-white/[0.07] transition-all group"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-white truncate">{workspace.name}</p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white truncate">{workspace.name}</p>
                     {workspace.description && (
-                      <p className="text-xs text-slate-500 mt-1 truncate">{workspace.description}</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-500 mt-1 truncate">{workspace.description}</p>
                     )}
                   </div>
 
@@ -173,8 +173,8 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
                 <Trash2 size={18} className="text-red-400" />
               </div>
               <div className="min-w-0">
-                <h4 className="text-base sm:text-lg font-black text-white truncate">Gestão de Aplicações</h4>
-                <p className="text-[10px] sm:text-xs text-slate-500">
+                <h4 className="text-base sm:text-lg font-black text-slate-900 dark:text-white truncate">Gestão de Aplicações</h4>
+                <p className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-500">
                   {sites?.length || 0} aplicaç{sites?.length !== 1 ? 'ões' : 'ão'} no workspace atual
                 </p>
               </div>
@@ -189,8 +189,8 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
                   className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 bg-white/5 border border-white/5 rounded-xl sm:rounded-2xl hover:border-white/10 hover:bg-white/[0.07] transition-all group"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-white truncate">{site.name}</p>
-                    <p className="text-xs text-slate-500 font-mono truncate mt-1">{site.url}</p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white truncate">{site.name}</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-500 font-mono truncate mt-1">{site.url}</p>
                   </div>
 
                   {deleteSiteConfirmId === site.id ? (
