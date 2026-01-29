@@ -112,7 +112,7 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
               {workspaces.map((workspace) => (
                 <div
                   key={workspace.id}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 bg-white/5 border border-white/5 rounded-xl sm:rounded-2xl hover:border-white/10 hover:bg-white/[0.07] transition-all group"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/5 rounded-xl sm:rounded-2xl hover:border-slate-400 dark:hover:border-white/10 hover:bg-slate-200 dark:hover:bg-white/[0.07] transition-all group"
                 >
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-bold text-slate-900 dark:text-white truncate">{workspace.name}</p>
@@ -186,7 +186,7 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
               {sites.map((site) => (
                 <div
                   key={site.id}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 bg-white/5 border border-white/5 rounded-xl sm:rounded-2xl hover:border-white/10 hover:bg-white/[0.07] transition-all group"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/5 rounded-xl sm:rounded-2xl hover:border-slate-400 dark:hover:border-white/10 hover:bg-slate-200 dark:hover:bg-white/[0.07] transition-all group"
                 >
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-bold text-slate-900 dark:text-white truncate">{site.name}</p>
