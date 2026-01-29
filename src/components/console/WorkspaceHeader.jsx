@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Activity, Clock } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 export default function WorkspaceHeader({ activeSite, view }) {
   const [time, setTime] = useState(new Date().toLocaleTimeString());
@@ -12,7 +13,7 @@ export default function WorkspaceHeader({ activeSite, view }) {
   }, []);
 
   return (
-    <header className="h-20 bg-slate-900/20 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-6 lg:px-10">
+    <header className="h-20 bg-slate-900/20 dark:bg-slate-900/20 backdrop-blur-2xl border-b border-white/5 dark:border-white/5 flex items-center justify-between px-6 lg:px-10 light:bg-white/80 light:border-slate-200">
       <div className="flex items-center gap-4 lg:gap-6">
         <div className="flex flex-col">
           <h2 className="text-lg lg:text-xl font-black text-white tracking-tight flex items-center gap-3">
@@ -50,7 +51,8 @@ export default function WorkspaceHeader({ activeSite, view }) {
             </a>
           </>
         )}
-        <button className="p-3 bg-white/5 hover:bg-white/10 text-slate-400 rounded-2xl transition-all">
+        <ThemeToggle />
+        <button className="p-3 bg-white/5 hover:bg-white/10 text-slate-400 dark:text-slate-400 rounded-2xl transition-all">
           <Activity size={18} />
         </button>
       </div>
