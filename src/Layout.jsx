@@ -1,22 +1,34 @@
 import React from 'react';
 import { Toaster } from 'sonner';
+import { ThemeProvider } from 'next-themes';
 
 export default function Layout({ children }) {
   return (
-    <>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <Toaster 
         position="top-right" 
-        theme="dark"
         toastOptions={{
           style: {
-            background: 'rgb(30 41 59)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            color: 'white',
+            background: 'var(--toast-bg)',
+            border: '1px solid var(--toast-border)',
+            color: 'var(--toast-text)',
           },
         }}
       />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        
+        :root {
+          --toast-bg: rgb(30 41 59);
+          --toast-border: rgba(255, 255, 255, 0.1);
+          --toast-text: white;
+        }
+
+        .light {
+          --toast-bg: white;
+          --toast-border: rgba(0, 0, 0, 0.1);
+          --toast-text: rgb(15 23 42);
+        }
         
         * {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -73,6 +85,6 @@ export default function Layout({ children }) {
         }
       `}</style>
       {children}
-    </>
+    </ThemeProvider>
   );
 }

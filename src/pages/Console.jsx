@@ -193,7 +193,7 @@ export default function Console() {
   }, []);
 
   return (
-    <div className="h-screen w-full flex bg-slate-950 text-slate-200 overflow-hidden font-sans">
+    <div className="h-screen w-full flex bg-slate-950 dark:bg-slate-950 text-slate-200 dark:text-slate-200 overflow-hidden font-sans light:bg-slate-50 light:text-slate-900">
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div
@@ -234,7 +234,7 @@ export default function Console() {
       </button>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col relative bg-slate-950 overflow-hidden">
+      <main className="flex-1 flex flex-col relative bg-slate-950 dark:bg-slate-950 overflow-hidden light:bg-slate-50">
         <WorkspaceHeader activeSite={activeSite} view={view} />
 
         <div className="flex-1 relative overflow-hidden flex flex-col">

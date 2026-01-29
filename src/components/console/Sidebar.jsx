@@ -48,9 +48,10 @@ export default function Sidebar({
     <aside className={`
       ${isSidebarOpen ? 'w-80 translate-x-0' : 'w-20 -translate-x-full lg:translate-x-0'} 
       fixed lg:relative inset-y-0 left-0 z-40
-      flex-shrink-0 bg-slate-900/95 lg:bg-slate-900/40 backdrop-blur-md 
-      border-r border-white/5 transition-all duration-300 flex flex-col
+      flex-shrink-0 bg-slate-900/95 dark:bg-slate-900/95 lg:bg-slate-900/40 lg:dark:bg-slate-900/40 backdrop-blur-md 
+      border-r border-white/5 dark:border-white/5 transition-all duration-300 flex flex-col
       shadow-2xl lg:shadow-none
+      light:bg-white light:lg:bg-white/80 light:border-slate-200
     `}>
       {/* Header */}
       <div className="p-4 lg:p-6 flex items-center justify-between">

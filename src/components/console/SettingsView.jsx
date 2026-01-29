@@ -14,7 +14,7 @@ export default function SettingsView({ user, sitesCount, sites, onDeleteSite, wo
   }, []);
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-slate-950 to-slate-900">
+    <div className="flex-1 p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-slate-950 to-slate-900 dark:from-slate-950 dark:to-slate-900 light:from-slate-50 light:to-slate-100">
       <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 pb-20">
         {/* Header */}
         <div className="mb-8 sm:mb-12">
