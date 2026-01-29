@@ -171,6 +171,10 @@ export default function Console() {
   };
 
   const handleDeleteSite = async (id) => {
+    // Clear active site immediately if it's being deleted
+    if (activeSite?.id === id) {
+      setActiveSite(null);
+    }
     await deleteSiteMutation.mutateAsync(id);
   };
 
@@ -242,7 +246,7 @@ export default function Console() {
 
         <div className="flex-1 relative overflow-hidden flex flex-col">
           {view === 'workspace' ? (
-            activeSite ? (
+            activeSite && activeSite.id && activeSite.url ? (
               <Suspense fallback={
                 <div className="flex-1 flex items-center justify-center">
                   <div className="text-center">
