@@ -5,6 +5,14 @@ export default function IframeViewer({ site }) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
+  if (!site || !site.id || !site.url) {
+    return (
+      <div className="flex-1 flex items-center justify-center">
+        <p className="text-slate-500 text-sm">Nenhuma aplicação selecionada</p>
+      </div>
+    );
+  }
+
   const handleLoad = () => {
     setIsLoading(false);
   };
